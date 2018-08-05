@@ -1,4 +1,5 @@
 from datetime import datetime
+import pytz
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 from flaskblog import db, login_manager
@@ -36,7 +37,8 @@ class User(db.Model, UserMixin):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    dt_now = datetime.now(tz=pytz.UTC).astimezone(pytz.timezone('US/Eastern'))
+    date_posted = db.Column(db.DateTime, nullable=False, default=dt_now)
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
