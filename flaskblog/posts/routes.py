@@ -1,3 +1,5 @@
+from datetime import datetime
+import pytz
 from flask import (render_template, url_for, flash, redirect, request, abort, Blueprint)
 from flask_login import current_user, login_required
 from flaskblog import db
@@ -10,7 +12,8 @@ posts = Blueprint('posts', __name__)
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, link=form.link.data, author=current_user)
+        dt_now = datetime.now(tz=pytz.UTC).astimezone(pytz.timezone('US/Eastern'))
+        post = Post(title=form.title.data, content=form.content.data, link=form.link.data, author=current_user, date_posted=dt_now)
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')

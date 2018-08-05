@@ -37,8 +37,7 @@ class User(db.Model, UserMixin):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    dt_now = datetime.now(tz=pytz.UTC).astimezone(pytz.timezone('US/Eastern'))
-    date_posted = db.Column(db.DateTime, nullable=False, default=dt_now)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.now(tz=pytz.UTC).astimezone(pytz.timezone('US/Eastern')))
     content = db.Column(db.Text, nullable=False)
     month_now = datetime.now(tz=pytz.UTC).astimezone(pytz.timezone('US/Eastern')).strftime("%B")
     year_now = datetime.now(tz=pytz.UTC).astimezone(pytz.timezone('US/Eastern')).strftime("%Y")
