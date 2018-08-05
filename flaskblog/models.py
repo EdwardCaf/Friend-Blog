@@ -40,6 +40,7 @@ class Post(db.Model):
     dt_now = datetime.now(tz=pytz.UTC).astimezone(pytz.timezone('US/Eastern'))
     date_posted = db.Column(db.DateTime, nullable=False, default=dt_now)
     content = db.Column(db.Text, nullable=False)
+    link = db.Column(db.Text, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
