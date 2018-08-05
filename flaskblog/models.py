@@ -40,6 +40,10 @@ class Post(db.Model):
     dt_now = datetime.now(tz=pytz.UTC).astimezone(pytz.timezone('US/Eastern'))
     date_posted = db.Column(db.DateTime, nullable=False, default=dt_now)
     content = db.Column(db.Text, nullable=False)
+    month_now = datetime.now(tz=pytz.UTC).astimezone(pytz.timezone('US/Eastern')).strftime("%B")
+    year_now = datetime.now(tz=pytz.UTC).astimezone(pytz.timezone('US/Eastern')).strftime("%Y")
+    month = db.Column(db.Text, nullable=False, default=month_now)
+    year = db.Column(db.Text, nullable=False, default=year_now)
     link = db.Column(db.Text, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
