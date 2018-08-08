@@ -29,7 +29,7 @@ def post(post_id):
 @login_required
 def update_post(post_id):
     post = Post.query.get_or_404(post_id)
-    if current_user.username == 'admin_edcaf':
+    if current_user.username == 'admin_1':
         db.session.delete(post)
         db.session.commit()
         flash('Your post has been deleted', 'success')
@@ -53,7 +53,7 @@ def update_post(post_id):
 @login_required
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
-    if current_user.username == 'admin_edcaf':
+    if current_user.username == 'admin_1':
         db.session.delete(post)
         db.session.commit()
         flash('Your post has been deleted', 'success')
